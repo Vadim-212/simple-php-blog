@@ -33,7 +33,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-                        <li class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a href="{{ route('posts.index') }}" class="nav-link">Посты</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('about') }}" class="nav-link">О сайте</a>
                         </li>
                     </ul>

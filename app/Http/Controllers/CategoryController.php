@@ -11,6 +11,7 @@ class CategoryController extends Controller
 
     public function index(User $user)
     {
+        $categories = $user->categories->get();
         $categories = Category::query()
             ->where('user_id', $user->id)
             ->get();
@@ -24,15 +25,15 @@ class CategoryController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Category::class);
         return view('categories.form');
     }
 
 
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'name' =>'required|string|min:5'
-        ]);
+        $this->authorize('create', Category::class);
+        $data = $this->validated();
         $data['user_id'] = auth()->id();
         Category::query()->create($data);
 
@@ -50,37 +51,34 @@ class CategoryController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+
     public function edit(Category $category)
     {
-        //
+        $this->authorize('update', $category);
+        return view('categories.form', [
+            'category' => $category
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+
     public function update(Request $request, Category $category)
     {
-        //
+        $this->authorize('update', $category);
+        $data = $this->validated();
+        $category->update($data);
+        return redirect()->route('categories.index', auth()->user());
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return back();
+    }
+
+    protected function validated() {
+        return request()->validate([
+            'name' =>'required|string|min:5'
+        ]);
     }
 }

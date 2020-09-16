@@ -5,9 +5,9 @@
     <div class="d-flex align-items-center">
         <div class="h3">Категории {{ $user->name }}</div>
 
-        @if(auth()->id() == $user->id)
+        @can('create', \App\Models\Category::class)
             <a href="{{ route('categories.create') }}" class="btn btn-success ml-auto">Добавить категорию</a>
-        @endif
+        @endcan
     </div>
 
     @if($categories->isNotEmpty())
@@ -15,7 +15,20 @@
             @foreach($categories as $category)
                 <div class="col-md-3">
                     <div class="card card-body">
-                        {{ $category->name }}
+                        <div class="mb-3">
+                            {{ $category->name }}
+                        </div>
+                        <div class="d-flex align-items-center justify-content-end">
+                            @can('update', $category)
+                            <a href="{{ route('categories.edit', $category) }}" class="mt-3 btn btn-warning btn-sm">Ред.</a>
+                            @endcan
+                            @can('delete', $category)
+                            <form action="{{ route('categories.destroy', $category) }}" method="post">
+                                @csrf @method('delete')
+                                <button class="mt-3 btn btn-danger btn-sm">Удалить</button>
+                            </form>
+                            @endcan
+                        </div>
                     </div>
                 </div>
             @endforeach

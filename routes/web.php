@@ -18,8 +18,10 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\SiteController::class, 'index'])->name('index');
 Route::get('about', [\App\Http\Controllers\SiteController::class, 'about'])->name('about');
 
-Route::get('greeting/hello/{name}', [\App\Http\Controllers\GreetingController::class, 'hello'])->name('greeting.hello');
-
+Route::middleware('auth')->group(function () {
+    Route::resource('categories', \App\Http\Controllers\CategoryController::class)->except('index');
+    Route::resource('posts', \App\Http\Controllers\PostController::class)->except('index', 'show');
+});
 Route::get('user/{user}/categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
-Route::get('categories/create', [\App\Http\Controllers\CategoryController::class, 'create'])->name('categories.create');
-Route::post('categories', [\App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
+
+Route::resource('posts', \App\Http\Controllers\PostController::class)->only('index', 'show');
