@@ -20,4 +20,14 @@ class Post extends Model
     function category() {
         return $this->belongsTo(Category::class);
     }
+
+    function likes() {
+        return $this->hasMany(Like::class);
+    }
+
+    function isLikedBy(User $user) {
+        return $this->likes()
+            ->where('user_id', $user->id)
+            ->exists();
+    }
 }

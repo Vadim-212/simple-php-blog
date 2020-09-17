@@ -21,7 +21,9 @@ Route::get('about', [\App\Http\Controllers\SiteController::class, 'about'])->nam
 Route::middleware('auth')->group(function () {
     Route::resource('categories', \App\Http\Controllers\CategoryController::class)->except('index');
     Route::resource('posts', \App\Http\Controllers\PostController::class)->except('index', 'show');
+    Route::put('posts/{post}/like', [\App\Http\Controllers\LikeController::class, 'toggle'])->name('likes.toggle');
 });
 Route::get('user/{user}/categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 
 Route::resource('posts', \App\Http\Controllers\PostController::class)->only('index', 'show');
+

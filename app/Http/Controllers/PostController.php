@@ -11,9 +11,13 @@ class PostController extends Controller
 
     public function index()
     {
-        $this->authorize('view-any', Post::class);
+        //$this->authorize('view-any', Post::class);
+        $posts = Post::query()
+            ->latest()
+            ->paginate(5);
+
         return view('posts.index', [
-            'posts' => Post::all()
+            'posts' => $posts
         ]);
     }
 
