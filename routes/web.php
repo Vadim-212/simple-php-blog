@@ -27,3 +27,5 @@ Route::get('user/{user}/categories', [\App\Http\Controllers\CategoryController::
 
 Route::resource('posts', \App\Http\Controllers\PostController::class)->only('index', 'show');
 
+Route::get('users/{user}/posts', [\App\Http\Controllers\PostController::class, 'byUser'])->name('user.posts');
+Route::get('categories/{category}/posts', [\App\Http\Controllers\PostController::class, 'byCategory'])->name('category.posts');

@@ -1,5 +1,5 @@
 window._ = require('lodash');
-
+import bsCustomFileInput from 'bs-custom-file-input'
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
@@ -11,6 +11,9 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    $(document).ready(() => {
+        bsCustomFileInput.init()
+    })
 } catch (e) {}
 
 /**

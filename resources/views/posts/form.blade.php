@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-mb-4">
             <form action="{{ $post ? route('posts.update', $post) : route('posts.store') }}"
-                  class="card card-body" method="post">
+                  class="card card-body" method="post" enctype="multipart/form-data">
                 @csrf
                 @if($post) @method('put') @endif
                 <div class="form-group">
@@ -45,6 +45,18 @@
                         <textarea class="form-control"
                                   name="content" id="content" rows="10"
                                   placeholder="Текст поста...">{{ old('content', $post->content ?? null) }}</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="image">Изображение</label>
+                    <div class="custom-file is-invalid">
+                        <input type="file" accept=".jpg,.png,.bmp,.jpeg,.gif,.webp" class="custom-file-input @error('image') is-invalid @enderror" id="image" name="image">
+                        <label class="custom-file-label" for="image">Выберите изображение...</label>
+                        @error('image')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                        @enderror
                     </div>
                 </div>
                 <button class="btn btn-primary">{{ $post ? 'Изменить' : 'Добавить' }}</button>

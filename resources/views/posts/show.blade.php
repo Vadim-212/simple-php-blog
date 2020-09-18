@@ -22,9 +22,15 @@
 
     <hr style="border-style: dashed;">
 
+    @if($post->image_path)
+        <img src="{{ Storage::url($post->image_path) }}" alt="{{ $post->title }}">
+    @endif
+
+    <hr style="border-style: dashed;">
+
     <div class="mb-3 d-flex">
         <div>
-            Автор - {{ $post->user->name }}
+            Автор - {{ $post->user->name }}, Категория - {{ $post->category->name }}
         </div>
         <div class="ml-auto">
             Создано: {{ $post->created_at->diffForHumans() }}
