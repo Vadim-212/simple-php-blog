@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('categories', \App\Http\Controllers\CategoryController::class)->except('index');
     Route::resource('posts', \App\Http\Controllers\PostController::class)->except('index', 'show');
     Route::put('posts/{post}/like', [\App\Http\Controllers\LikeController::class, 'toggle'])->name('likes.toggle');
+    Route::resource('todos', \App\Http\Controllers\TodoController::class)->except('index');
 });
 Route::get('user/{user}/categories', [\App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
 
@@ -29,3 +30,5 @@ Route::resource('posts', \App\Http\Controllers\PostController::class)->only('ind
 
 Route::get('users/{user}/posts', [\App\Http\Controllers\PostController::class, 'byUser'])->name('user.posts');
 Route::get('categories/{category}/posts', [\App\Http\Controllers\PostController::class, 'byCategory'])->name('category.posts');
+
+Route::get('user/{user}/todos', [\App\Http\Controllers\TodoController::class, 'index'])->name('todos.index');

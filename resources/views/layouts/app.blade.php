@@ -60,6 +60,10 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('todos.index', auth()->user()) }}">
+                                        Список дел
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('categories.index', auth()->user()) }}">
                                         Категории
                                     </a>
