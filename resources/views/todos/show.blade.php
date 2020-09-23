@@ -24,7 +24,15 @@
 
     <div class="mb-3 d-flex">
         <div>
-            Автор - {{ $todo->user->name }}, {{ $todo->is_active ? 'Активно' : 'Не активно' }}
+            @if(!$todo->is_active)
+                <div class="todo-inactive">
+                    Не активно
+                </div>
+            @else
+                <div class="todo-active">
+                    Активно
+                </div>
+            @endif
         </div>
         <div class="ml-auto">
             Создано: {{ $todo->created_at->diffForHumans() }}

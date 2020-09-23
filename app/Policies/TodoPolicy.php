@@ -17,7 +17,7 @@ class TodoPolicy
 
     public function view(User $user, Todo $todo)
     {
-        return true;
+        return $todo->user_id == $user->id;
     }
 
     public function create(User $user)

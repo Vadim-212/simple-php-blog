@@ -31,4 +31,4 @@ Route::resource('posts', \App\Http\Controllers\PostController::class)->only('ind
 Route::get('users/{user}/posts', [\App\Http\Controllers\PostController::class, 'byUser'])->name('user.posts');
 Route::get('categories/{category}/posts', [\App\Http\Controllers\PostController::class, 'byCategory'])->name('category.posts');
 
-Route::get('user/{user}/todos', [\App\Http\Controllers\TodoController::class, 'index'])->name('todos.index');
+Route::get('todos', [\App\Http\Controllers\TodoController::class, 'index'])->name('todos.index');

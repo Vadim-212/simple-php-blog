@@ -7,8 +7,9 @@
 @section('content')
 
     <div class="h3">
-        {{ $todo ? 'Редактирование' : 'Создание' }}
+        {{ $todo ? 'Редактирование задачи' : 'Создание задачи' }}
     </div>
+
     <div class="row">
         <div class="col-mb-4">
             <form action="{{ $todo ? route('todos.update', $todo) : route('todos.store') }}"
@@ -29,14 +30,14 @@
                 <div class="form-group">
                     <label for="content">Текст</label>
                     <textarea class="form-control"
-                              name="content" id="content" rows="10"
+                              name="content" id="content" rows="10" cols="50"
                               placeholder="Что требуется сделать?">{{ old('content', $todo->content ?? null) }}</textarea>
                 </div>
-                <div class="form-group">
-                    <label for="is_active">Активно</label>
-                    <input type="checkbox" class="@error('is_active') is-invalid @enderror"
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input @error('is_active') is-invalid @enderror"
                            id="is_active" name="is_active"
                         {{ old('is_active') ? 'checked="checked"' : '' }}>
+                    <label class="form-check-label" for="is_active">Активно</label>
                     @error('is_active')
                     <div class="invalid-feedback">
                         {{ $message }}

@@ -13,6 +13,7 @@ class TodoController extends Controller
     public function index()
     {
         $todos = Todo::query()
+            ->where('user_id', auth()->user()->id)
             ->latest()
             ->paginate($this->perPage);
 

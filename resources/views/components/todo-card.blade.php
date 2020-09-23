@@ -24,7 +24,17 @@
 
     <p class="mb-0">{{ Str::words($todo->content, 22) }}</p>
 
-    <div class="text-right">
+
+    <div class="d-flex align-items-center align-content-center justify-content-between">
+        @if(!$todo->is_active)
+            <div class="todo-inactive">
+                Не активно
+            </div>
+        @else
+            <div class="todo-active">
+                Активно
+            </div>
+        @endif
         <a class="btn btn-primary" href="{{ route('todos.show', $todo) }}">
             Подробнее...
         </a>

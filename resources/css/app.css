@@ -1,0 +1,39 @@
+
+
+.main-page-link {
+    color: black;
+    transition: color 0.15s ease-in-out,
+                background-color 0.15s ease-in-out,
+                border-color 0.15s ease-in-out,
+                box-shadow 0.15s ease-in-out;
+}
+
+.main-page-link:hover {
+    text-decoration: none;
+    color: black;
+    background-color: #e6f3ff;
+}
+
+.main-page-link>div {
+    margin: 0;
+}
+
+.todo-active {
+    height: 25px;
+    border: 1px solid #40b918;
+    padding: 0 0.55rem;
+    border-radius: 5px;
+    background-color: #40b918;
+    color: white;
+}
+
+.todo-inactive {
+    height: 25px;
+    border: 1px solid #929292;
+    padding: 0 0.55rem;
+    border-radius: 5px;
+    background-color: #929292;
+    color: white;
+}
+
+
